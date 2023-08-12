@@ -15,33 +15,33 @@ struct EditNoteView: View {
     
     @State private var title = ""
     @State private var content = ""
+    @State private var date = Date()
     
     var body: some View {
-        Form {
-            Section {
-                TextField("\(note.title!)", text:$title)
+        NavigationView {
+            Form {
+                Section(header: Text("Título")) {
+                    TextField("", text: $title)
                     .onAppear{
                         title = note.title!
                         content = note.content!
-                        
+                                                
                     }
-                VStack {
-                    TextEditor(text: $content)
-                        .frame(height: 200)
-                        .padding(.vertical, 10)
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 10)
-                                .stroke(Color.secondary, lineWidth: 1)
-                        )
                 }
-                .padding()
-                HStack {
-                    Spacer()
-                    Button("Save") {
-                        DataController().editNote(note: note, title: title, content: content, date: Date(), context: managedObjContext)
-                        dismiss()
-                    }
-                    Spacer()
+                Section(header: Text("Conteúdo")){
+                    TextEditor(text: $content)
+                }
+                Section(header: Text("Data")){
+                    DatePicker("", selection: $date,in: ...Date())
+                }
+            }
+        }
+        .navigationBarTitle("Editar Nota")
+        .toolbar {
+            ToolbarItem(placement: .navigationBarTrailing){
+                Button("Salvar"){
+                    DataController().editNote(note: note, title: title, content: content, date: Date(), context: managedObjContext)
+                    dismiss()
                 }
             }
         }
