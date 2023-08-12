@@ -7,49 +7,26 @@
 
 import SwiftUI
 import CoreData
+import MapKit
+import UIKit
+import Combine
 
 struct ContentView: View {
-    @Environment(\.managedObjectContext) var managedObjContext
-    @FetchRequest(sortDescriptors: [SortDescriptor(\.date, order: .reverse)]) var note: FetchedResults<Note>
-    
-    @State private var showingAddView = false
+    @State private var showingAddNoteSheet = false
+    @EnvironmentObject var appLockVM: AppLockViewModel
     var body: some View {
-        NavigationView {
-            VStack(alignment: .leading) {
-                List {
-                    ForEach(note) { note in
-                        NavigationLink(destination: EditNoteView(note: note)) {
-                            Text(note.title!)
-                        }
-                    }
-                    .onDelete(perform: deleteNote)
-                }
+        ZStack{
+            if !appLockVM.isAppLockEnabled || appLockVM.isAppUnlocked{
+                HomeView().environmentObject(appLockVM)
             }
-            .navigationTitle("Notes")
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    Button {
-                        showingAddView.toggle()
-                    } label: {
-                        Label("Add Note", systemImage: "plus.circle")
-                    }
-                }
-                ToolbarItem(placement: .navigationBarLeading) {
-                    EditButton()
-                }
-            }
-            .sheet(isPresented: $showingAddView) {
-                AddNoteView()
+            else {
+                NotesLockView().environmentObject(appLockVM)
             }
         }
-        .navigationViewStyle(.stack)
-    }
-    
-    private func deleteNote(offsets: IndexSet) {
-        withAnimation {
-            offsets.map { note[$0] }.forEach(managedObjContext.delete)
-            DataController().save(context: managedObjContext)
-                
+        .onAppear{
+            if appLockVM.isAppLockEnabled{
+                appLockVM.appLockValidation()
+            }
         }
     }
 }

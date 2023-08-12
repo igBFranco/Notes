@@ -10,10 +10,11 @@ import SwiftUI
 @main
 struct NotesApp: App {
     @StateObject private var dataController = DataController()
+    let appLockVM = AppLockViewModel()
     
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ContentView().environmentObject(appLockVM)
                 .environment(\.managedObjectContext, dataController.container.viewContext)
         }
     }
