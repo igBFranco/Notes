@@ -16,27 +16,25 @@ struct AddNoteView: View {
     @State private var date = Date()
     
     var body: some View {
-        Form {
-            Section {
-                TextField("Note Title", text: $title)
-                
-                VStack {
-                    TextEditor(text: $content)
-                        .frame(height: 200)
-                        .padding(.vertical, 10)
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 10)
-                                .stroke(Color.secondary, lineWidth: 1)
-                        )
+        NavigationView {
+            Form {
+                Section(header: Text("Título")) {
+                    TextField("", text: $title)
                 }
-                .padding()
-                HStack {
-                    Spacer()
-                    Button("Submit") {
+                Section(header: Text("Conteúdo")){
+                    TextEditor(text: $content)
+                }
+                Section(header: Text("Data")){
+                    DatePicker("", selection: $date,in: ...Date())
+                }
+            }
+            .navigationBarTitle("Adicionar Nota")
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button("Salvar") {
                         DataController().addNote(title: title, content: content, date: date, context: managedObjContext)
                         dismiss()
                     }
-                    Spacer()
                 }
             }
         }
