@@ -7,13 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5371C2D32A881E1900A4737C /* EditNoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5371C2D22A881E1900A4737C /* EditNoteView.swift */; };
 		53AB095D2A81D80D00F498E1 /* NotesApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53AB095C2A81D80D00F498E1 /* NotesApp.swift */; };
 		53AB095F2A81D80D00F498E1 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53AB095E2A81D80D00F498E1 /* ContentView.swift */; };
 		53AB09612A81D80F00F498E1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 53AB09602A81D80F00F498E1 /* Assets.xcassets */; };
 		53AB09642A81D80F00F498E1 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 53AB09632A81D80F00F498E1 /* Preview Assets.xcassets */; };
-		53AB096E2A81D80F00F498E1 /* NotesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53AB096D2A81D80F00F498E1 /* NotesTests.swift */; };
-		53AB09782A81D80F00F498E1 /* NotesUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53AB09772A81D80F00F498E1 /* NotesUITests.swift */; };
-		53AB097A2A81D80F00F498E1 /* NotesUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53AB09792A81D80F00F498E1 /* NotesUITestsLaunchTests.swift */; };
+		53AB09882A81D8A700F498E1 /* NoteModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 53AB09862A81D8A700F498E1 /* NoteModel.xcdatamodeld */; };
+		53AB098A2A81D93900F498E1 /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53AB09892A81D93900F498E1 /* DataController.swift */; };
+		53AB098E2A81DB7200F498E1 /* AddNoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53AB098D2A81DB7200F498E1 /* AddNoteView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,16 +35,17 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		5371C2D22A881E1900A4737C /* EditNoteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditNoteView.swift; sourceTree = "<group>"; };
 		53AB09592A81D80D00F498E1 /* Notes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Notes.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		53AB095C2A81D80D00F498E1 /* NotesApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesApp.swift; sourceTree = "<group>"; };
 		53AB095E2A81D80D00F498E1 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		53AB09602A81D80F00F498E1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		53AB09632A81D80F00F498E1 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		53AB09692A81D80F00F498E1 /* NotesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NotesTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		53AB096D2A81D80F00F498E1 /* NotesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesTests.swift; sourceTree = "<group>"; };
 		53AB09732A81D80F00F498E1 /* NotesUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NotesUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		53AB09772A81D80F00F498E1 /* NotesUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesUITests.swift; sourceTree = "<group>"; };
-		53AB09792A81D80F00F498E1 /* NotesUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		53AB09872A81D8A700F498E1 /* NoteModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = NoteModel.xcdatamodel; sourceTree = "<group>"; };
+		53AB09892A81D93900F498E1 /* DataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
+		53AB098D2A81DB7200F498E1 /* AddNoteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNoteView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,8 +77,6 @@
 			isa = PBXGroup;
 			children = (
 				53AB095B2A81D80D00F498E1 /* Notes */,
-				53AB096C2A81D80F00F498E1 /* NotesTests */,
-				53AB09762A81D80F00F498E1 /* NotesUITests */,
 				53AB095A2A81D80D00F498E1 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -94,7 +94,10 @@
 		53AB095B2A81D80D00F498E1 /* Notes */ = {
 			isa = PBXGroup;
 			children = (
+				53AB098B2A81DB5600F498E1 /* Views */,
 				53AB095C2A81D80D00F498E1 /* NotesApp.swift */,
+				53AB09862A81D8A700F498E1 /* NoteModel.xcdatamodeld */,
+				53AB09892A81D93900F498E1 /* DataController.swift */,
 				53AB095E2A81D80D00F498E1 /* ContentView.swift */,
 				53AB09602A81D80F00F498E1 /* Assets.xcassets */,
 				53AB09622A81D80F00F498E1 /* Preview Content */,
@@ -110,21 +113,13 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
-		53AB096C2A81D80F00F498E1 /* NotesTests */ = {
+		53AB098B2A81DB5600F498E1 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				53AB096D2A81D80F00F498E1 /* NotesTests.swift */,
+				53AB098D2A81DB7200F498E1 /* AddNoteView.swift */,
+				5371C2D22A881E1900A4737C /* EditNoteView.swift */,
 			);
-			path = NotesTests;
-			sourceTree = "<group>";
-		};
-		53AB09762A81D80F00F498E1 /* NotesUITests */ = {
-			isa = PBXGroup;
-			children = (
-				53AB09772A81D80F00F498E1 /* NotesUITests.swift */,
-				53AB09792A81D80F00F498E1 /* NotesUITestsLaunchTests.swift */,
-			);
-			path = NotesUITests;
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -258,7 +253,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				53AB095F2A81D80D00F498E1 /* ContentView.swift in Sources */,
+				53AB098A2A81D93900F498E1 /* DataController.swift in Sources */,
 				53AB095D2A81D80D00F498E1 /* NotesApp.swift in Sources */,
+				53AB09882A81D8A700F498E1 /* NoteModel.xcdatamodeld in Sources */,
+				5371C2D32A881E1900A4737C /* EditNoteView.swift in Sources */,
+				53AB098E2A81DB7200F498E1 /* AddNoteView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -266,7 +265,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				53AB096E2A81D80F00F498E1 /* NotesTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -274,8 +272,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				53AB097A2A81D80F00F498E1 /* NotesUITestsLaunchTests.swift in Sources */,
-				53AB09782A81D80F00F498E1 /* NotesUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -583,6 +579,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		53AB09862A81D8A700F498E1 /* NoteModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				53AB09872A81D8A700F498E1 /* NoteModel.xcdatamodel */,
+			);
+			currentVersion = 53AB09872A81D8A700F498E1 /* NoteModel.xcdatamodel */;
+			path = NoteModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 53AB09512A81D80D00F498E1 /* Project object */;
 }

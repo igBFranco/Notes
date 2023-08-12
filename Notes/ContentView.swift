@@ -6,16 +6,51 @@
 //
 
 import SwiftUI
+import CoreData
 
 struct ContentView: View {
+    @Environment(\.managedObjectContext) var managedObjContext
+    @FetchRequest(sortDescriptors: [SortDescriptor(\.date, order: .reverse)]) var note: FetchedResults<Note>
+    
+    @State private var showingAddView = false
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
-            Text("Hello, world!")
+        NavigationView {
+            VStack(alignment: .leading) {
+                List {
+                    ForEach(note) { note in
+                        NavigationLink(destination: EditNoteView(note: note)) {
+                            Text(note.title!)
+                        }
+                    }
+                    .onDelete(perform: deleteNote)
+                }
+            }
+            .navigationTitle("Notes")
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button {
+                        showingAddView.toggle()
+                    } label: {
+                        Label("Add Note", systemImage: "plus.circle")
+                    }
+                }
+                ToolbarItem(placement: .navigationBarLeading) {
+                    EditButton()
+                }
+            }
+            .sheet(isPresented: $showingAddView) {
+                AddNoteView()
+            }
         }
-        .padding()
+        .navigationViewStyle(.stack)
+    }
+    
+    private func deleteNote(offsets: IndexSet) {
+        withAnimation {
+            offsets.map { note[$0] }.forEach(managedObjContext.delete)
+            DataController().save(context: managedObjContext)
+                
+        }
     }
 }
 
