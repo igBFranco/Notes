@@ -18,7 +18,7 @@ struct NoteDetailView: View {
     
     var body: some View {
         NavigationStack {
-            Text(note.content!)
+            Text(note.content ?? "No content available")
                 .toolbar {
                     ToolbarItem(placement: .bottomBar) {
                         HStack {
@@ -35,6 +35,8 @@ struct NoteDetailView: View {
                                 showingAlert = false
                             }
                             Button("Excluir", role: .destructive) {
+                                deleteNote()
+                                dismiss()
                                 showingAlert = false
                             }
                         }
@@ -48,8 +50,21 @@ struct NoteDetailView: View {
                 }
             }
         }
-        .navigationBarTitle(note.title!)
+        .navigationBarTitle(note.title ?? "Untitled")
 
+    }
+    
+    private func deleteNote() {
+        withAnimation {
+            managedObjContext.delete(note)
+            dismiss()
+            do {
+                try managedObjContext.save()
+                } catch {
+                    print("Error deleting note: \(error)")
+            }
+            
+        }
     }
 }
 
