@@ -16,6 +16,13 @@ struct EditNoteView: View {
     @State private var title = ""
     @State private var content = ""
     @State private var date = Date()
+    @State private var image = UIImage()
+    
+    @State private var selectedImage: UIImage?
+    @State private var latitude: Double = 0.0
+    @State private var longitude: Double = 0.0
+    
+    @State private var isImagePickerPresented = false
     
     var body: some View {
         NavigationView {
@@ -25,6 +32,10 @@ struct EditNoteView: View {
                     .onAppear{
                         title = note.title!
                         content = note.content!
+                        date = note.date!
+                        if let imageData = note.imageData, let loadedImage = UIImage(data: imageData) {
+                            image = loadedImage
+                        }
                                                 
                     }
                 }
@@ -34,17 +45,36 @@ struct EditNoteView: View {
                 Section(header: Text("Data")){
                     DatePicker("", selection: $date,in: ...Date())
                 }
+                Section(header: Text("Imagem")){
+                    Button("Adicionar Imagem") {
+                        isImagePickerPresented.toggle()
+                    }
+                    if let image = selectedImage {
+                            Image(uiImage: image)
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .cornerRadius(10)
+                                .frame(height: 200)
+                    }
+                }
             }
         }
         .navigationBarTitle("Editar Nota")
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing){
                 Button("Salvar"){
-                    DataController().editNote(note: note, title: title, content: content, date: Date(), context: managedObjContext)
+                    DataController().editNote(note: note, title: title, content: content, date: Date(), imageData: image.jpegData(compressionQuality: 0.8), context: managedObjContext)
                     dismiss()
                 }
             }
         }
+        .sheet(isPresented: $isImagePickerPresented, onDismiss: loadImage) {
+            ImagePicker(image: $selectedImage)
+        }
+    }
+    
+    private func loadImage() {
+        guard let selectedImage = selectedImage else { return }
     }
 }
 

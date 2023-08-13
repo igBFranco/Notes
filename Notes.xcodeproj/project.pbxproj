@@ -13,6 +13,7 @@
 		5371C2D92A88237700A4737C /* NotesConfigView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5371C2D82A88237700A4737C /* NotesConfigView.swift */; };
 		5371C2DB2A8823B500A4737C /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5371C2DA2A8823B500A4737C /* HomeView.swift */; };
 		5371C2DD2A8827E100A4737C /* NoteDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5371C2DC2A8827E100A4737C /* NoteDetailView.swift */; };
+		5371C2DF2A89762900A4737C /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5371C2DE2A89762900A4737C /* ImagePicker.swift */; };
 		53AB095D2A81D80D00F498E1 /* NotesApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53AB095C2A81D80D00F498E1 /* NotesApp.swift */; };
 		53AB095F2A81D80D00F498E1 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53AB095E2A81D80D00F498E1 /* ContentView.swift */; };
 		53AB09612A81D80F00F498E1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 53AB09602A81D80F00F498E1 /* Assets.xcassets */; };
@@ -46,6 +47,7 @@
 		5371C2D82A88237700A4737C /* NotesConfigView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesConfigView.swift; sourceTree = "<group>"; };
 		5371C2DA2A8823B500A4737C /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		5371C2DC2A8827E100A4737C /* NoteDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteDetailView.swift; sourceTree = "<group>"; };
+		5371C2DE2A89762900A4737C /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		53AB09592A81D80D00F498E1 /* Notes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Notes.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		53AB095C2A81D80D00F498E1 /* NotesApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesApp.swift; sourceTree = "<group>"; };
 		53AB095E2A81D80D00F498E1 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -106,6 +108,7 @@
 			children = (
 				53AB098B2A81DB5600F498E1 /* Views */,
 				53AB095C2A81D80D00F498E1 /* NotesApp.swift */,
+				5371C2DE2A89762900A4737C /* ImagePicker.swift */,
 				5371C2D62A88233C00A4737C /* AppLockViewModel.swift */,
 				53AB09862A81D8A700F498E1 /* NoteModel.xcdatamodeld */,
 				53AB09892A81D93900F498E1 /* DataController.swift */,
@@ -276,6 +279,7 @@
 				53AB09882A81D8A700F498E1 /* NoteModel.xcdatamodeld in Sources */,
 				5371C2DD2A8827E100A4737C /* NoteDetailView.swift in Sources */,
 				5371C2D32A881E1900A4737C /* EditNoteView.swift in Sources */,
+				5371C2DF2A89762900A4737C /* ImagePicker.swift in Sources */,
 				53AB098E2A81DB7200F498E1 /* AddNoteView.swift in Sources */,
 				5371C2D72A88233C00A4737C /* AppLockViewModel.swift in Sources */,
 			);

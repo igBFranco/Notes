@@ -15,6 +15,12 @@ struct AddNoteView: View {
     @State private var content = ""
     @State private var date = Date()
     
+    @State private var selectedImage: UIImage?
+    @State private var latitude: Double = 0.0
+    @State private var longitude: Double = 0.0
+    
+    @State private var isImagePickerPresented = false
+    
     var body: some View {
         NavigationView {
             Form {
@@ -27,22 +33,36 @@ struct AddNoteView: View {
                 Section(header: Text("Data")){
                     DatePicker("", selection: $date,in: ...Date())
                 }
+                Section(header: Text("Imagem")){
+                    Button("Adicionar Imagem") {
+                        isImagePickerPresented.toggle()
+                    }
+                    if let image = selectedImage {
+                            Image(uiImage: image)
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .cornerRadius(10)
+                                .frame(height: 200)
+                    }
+                }
             }
             .navigationBarTitle("Adicionar Nota")
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button("Salvar") {
-                        DataController().addNote(title: title, content: content, date: date, context: managedObjContext)
+                        DataController().addNote(title: title, content: content, date: date, imageData: selectedImage?.jpegData(compressionQuality: 0.8), context: managedObjContext)
                         dismiss()
                     }
                 }
             }
+            .sheet(isPresented: $isImagePickerPresented, onDismiss: loadImage) {
+                ImagePicker(image: $selectedImage)
+            }
         }
+    }
+    
+    private func loadImage() {
+        guard let selectedImage = selectedImage else { return }
     }
 }
 
-struct AddNoteView_Previews: PreviewProvider {
-    static var previews: some View {
-        AddNoteView()
-    }
-}

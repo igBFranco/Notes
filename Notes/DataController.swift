@@ -7,6 +7,7 @@
 
 import Foundation
 import CoreData
+import UIKit
 
 class DataController: ObservableObject {
     let container = NSPersistentContainer(name: "NoteModel")
@@ -29,20 +30,22 @@ class DataController: ObservableObject {
         }
     }
     
-    func addNote(title: String, content: String, date: Date, context: NSManagedObjectContext) {
+    func addNote(title: String, content: String, date: Date, imageData: Data?, context: NSManagedObjectContext) {
         let note = Note(context: context)
         note.id = UUID()
         note.title = title
         note.content = content
         note.date = date
+        note.imageData = imageData
         
         save(context: context)
     }
     
-    func editNote(note: Note, title: String, content: String, date: Date, context: NSManagedObjectContext) {
+    func editNote(note: Note, title: String, content: String, date: Date, imageData: Data?, context: NSManagedObjectContext) {
         note.title = title
         note.content = content
         note.date = date
+        note.imageData = imageData
         
         save(context: context)
     }

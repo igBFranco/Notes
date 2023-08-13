@@ -15,10 +15,19 @@ struct NoteDetailView: View {
     
     @State private var title = ""
     @State private var content = ""
+    @State private var data = Date()
+
     
     var body: some View {
         NavigationStack {
+            if let imageData = note.imageData, let uiImage = UIImage(data: imageData) {
+                Image(uiImage: uiImage)
+                .resizable()
+                .scaledToFit()
+                .frame(maxHeight: 200)
+            }
             Text(note.content ?? "No content available")
+            
                 .toolbar {
                     ToolbarItem(placement: .bottomBar) {
                         HStack {
