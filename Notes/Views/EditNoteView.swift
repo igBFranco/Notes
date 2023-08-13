@@ -69,7 +69,9 @@ struct EditNoteView: View {
             }
         }
         .sheet(isPresented: $isImagePickerPresented, onDismiss: loadImage) {
-            ImagePicker(image: $selectedImage)
+            ImagePicker(image: $selectedImage, sourceType: .camera)
+            ImagePicker(image: $selectedImage, sourceType: .photoLibrary)
+
         }
     }
     

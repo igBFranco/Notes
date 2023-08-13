@@ -27,7 +27,6 @@ struct NoteDetailView: View {
                 .frame(maxHeight: 200)
             }
             Text(note.content ?? "No content available")
-            
                 .toolbar {
                     ToolbarItem(placement: .bottomBar) {
                         HStack {
