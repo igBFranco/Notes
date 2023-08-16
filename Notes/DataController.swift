@@ -43,11 +43,13 @@ class DataController: ObservableObject {
         save(context: context)
     }
     
-    func editNote(note: Note, title: String, content: String, date: Date, imageData: Data?, context: NSManagedObjectContext) {
+    func editNote(note: Note, title: String, content: String, date: Date, imageData: Data?, latitude: Double, longitude: Double, context: NSManagedObjectContext) {
         note.title = title
         note.content = content
         note.date = date
         note.imageData = imageData
+        note.latitude = latitude
+        note.longitude = longitude
         
         save(context: context)
     }

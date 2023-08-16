@@ -24,6 +24,7 @@ struct NoteDetailView: View {
     var body: some View {
         NavigationStack {
             Text(note.content ?? "No content available")
+                .padding(20)
             if let imageData = note.imageData, let uiImage = UIImage(data: imageData) {
                 Image(uiImage: uiImage)
                 .resizable()

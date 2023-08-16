@@ -38,7 +38,14 @@ struct AddNoteView: View {
                     TextEditor(text: $content)
                 }
                 Section(header: Text("Data")){
-                    DatePicker("", selection: $date, in: Date()...Date().addingTimeInterval(31536000))
+                    HStack {
+                        Spacer()
+                        DatePicker("", selection: $date, in: Date()...Date().addingTimeInterval(31536000))
+                        .datePickerStyle(CompactDatePickerStyle())
+                        .clipped()
+                        .labelsHidden()
+                        Spacer()
+                    }
                 }
                 Section(header: Text("Imagem")){
                     Button(action: {isCameraPresented.toggle()}){
@@ -69,21 +76,10 @@ struct AddNoteView: View {
                     }
                     Button(action: {isMapPresented.toggle()}){
                         HStack {
-                            Image(systemName: "mappin.and.ellipse")
+                            Image(systemName: "location.fill")
                             Text("Selecione a Localização")
                         }
                     }
-                    LocationButton {
-                        if let location = locationManager.location {
-                            selectedLocation = location.coordinate
-                            latitude = location.coordinate.latitude
-                            longitude = location.coordinate.longitude
-                        } else {
-                            selectedLocation = CLLocationCoordinate2D(latitude: -26.13261, longitude: -49.80888)
-                        }
-                    }
-                    .symbolVariant(.fill)
-                    .labelStyle(.titleAndIcon)
                 }
 
             }
