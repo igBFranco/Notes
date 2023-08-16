@@ -6,6 +6,8 @@
 //
 
 import SwiftUI
+import MapKit
+import CoreLocationUI
 
 struct AddNoteView: View {
     @Environment (\.managedObjectContext) var managedObjContext
@@ -16,11 +18,15 @@ struct AddNoteView: View {
     @State private var date = Date()
     
     @State private var selectedImage: UIImage?
+    @State private var selectedLocation: CLLocationCoordinate2D?
     @State private var latitude: Double = 0.0
     @State private var longitude: Double = 0.0
     
     @State private var isImagePickerPresented = false
     @State private var isCameraPresented = false
+    @State private var isMapPresented = false
+    
+    @State private var locationManager = CLLocationManager()
     
     var body: some View {
         NavigationView {
@@ -32,7 +38,7 @@ struct AddNoteView: View {
                     TextEditor(text: $content)
                 }
                 Section(header: Text("Data")){
-                    DatePicker("", selection: $date,in: ...Date())
+                    DatePicker("", selection: $date, in: Date()...Date().addingTimeInterval(31536000))
                 }
                 Section(header: Text("Imagem")){
                     Button(action: {isCameraPresented.toggle()}){
@@ -55,12 +61,37 @@ struct AddNoteView: View {
                                 .frame(height: 200)
                     }
                 }
+                Section(header: Text("Localização")){
+                    if (latitude != 0 && longitude != 0) {
+                        Map(coordinateRegion: .constant(MKCoordinateRegion(center: selectedLocation ?? locationManager.location?.coordinate ?? CLLocationCoordinate2D(latitude: 0, longitude: 0), span: MKCoordinateSpan(latitudeDelta: 0.2, longitudeDelta: 0.2))), showsUserLocation: true)
+                    .frame(height: 200)
+                    .cornerRadius(10)
+                    }
+                    Button(action: {isMapPresented.toggle()}){
+                        HStack {
+                            Image(systemName: "mappin.and.ellipse")
+                            Text("Selecione a Localização")
+                        }
+                    }
+                    LocationButton {
+                        if let location = locationManager.location {
+                            selectedLocation = location.coordinate
+                            latitude = location.coordinate.latitude
+                            longitude = location.coordinate.longitude
+                        } else {
+                            selectedLocation = CLLocationCoordinate2D(latitude: -26.13261, longitude: -49.80888)
+                        }
+                    }
+                    .symbolVariant(.fill)
+                    .labelStyle(.titleAndIcon)
+                }
+
             }
             .navigationBarTitle("Adicionar Nota")
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button("Salvar") {
-                        DataController().addNote(title: title, content: content, date: date, imageData: selectedImage?.jpegData(compressionQuality: 0.8), context: managedObjContext)
+                        DataController().addNote(title: title, content: content, date: date, imageData: selectedImage?.jpegData(compressionQuality: 0.8), latitude: selectedLocation?.latitude ?? 0, longitude: selectedLocation?.longitude ?? 0 , context: managedObjContext)
                         dismiss()
                     }
                 }
@@ -73,11 +104,22 @@ struct AddNoteView: View {
                 ImagePicker(image: $selectedImage, sourceType: .camera)
 
             }
+            .sheet(isPresented: $isMapPresented, onDismiss: updateSelectedLocation) {
+                MapView(selectedLocation: $selectedLocation, locationManager: locationManager)
+            }
+
         }
     }
     
     private func loadImage() {
         guard let selectedImage = selectedImage else { return }
+    }
+    
+    private func updateSelectedLocation() {
+        if let location = selectedLocation {
+               latitude = location.latitude
+               longitude = location.longitude
+           }
     }
 }
 

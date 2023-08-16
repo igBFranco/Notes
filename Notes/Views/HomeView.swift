@@ -11,7 +11,7 @@ import CoreData
 struct HomeView: View {
     @EnvironmentObject var appLockVM: AppLockViewModel
     @Environment(\.managedObjectContext) var managedObjContext
-    @FetchRequest(sortDescriptors: [SortDescriptor(\.date, order: .reverse)]) var note: FetchedResults<Note>
+    @FetchRequest(sortDescriptors: [SortDescriptor(\.title)]) var note: FetchedResults<Note>
     
     @State private var showingAddView = false
     var body: some View {

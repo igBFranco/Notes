@@ -30,13 +30,15 @@ class DataController: ObservableObject {
         }
     }
     
-    func addNote(title: String, content: String, date: Date, imageData: Data?, context: NSManagedObjectContext) {
+    func addNote(title: String, content: String, date: Date, imageData: Data?, latitude: Double, longitude: Double, context: NSManagedObjectContext) {
         let note = Note(context: context)
         note.id = UUID()
         note.title = title
         note.content = content
         note.date = date
         note.imageData = imageData
+        note.latitude = latitude
+        note.longitude = longitude
         
         save(context: context)
     }

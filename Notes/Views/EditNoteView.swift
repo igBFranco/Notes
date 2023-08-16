@@ -36,6 +36,7 @@ struct EditNoteView: View {
                         if let imageData = note.imageData, let loadedImage = UIImage(data: imageData) {
                             image = loadedImage
                         }
+                        
                                                 
                     }
                 }
